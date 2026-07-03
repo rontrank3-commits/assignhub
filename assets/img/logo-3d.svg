@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Stylized 3D-ish knot logo (vector approximation) -->
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-label="AssignHub 3D logo">
+  <defs>
+    <linearGradient id="lg1" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#6c78ff" />
+      <stop offset="1" stop-color="#4f46e5" />
+    </linearGradient>
+    <linearGradient id="lg2" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#111827" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#0b1220" stop-opacity="0.95"/>
+    </linearGradient>
+    <filter id="f1" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="12" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="100%" height="100%" fill="transparent"/>
+
+  <!-- shadow -->
+  <ellipse cx="520" cy="380" rx="160" ry="30" fill="#0b1220" opacity="0.08" />
+
+  <!-- knot group -->
+  <g transform="translate(420,260) scale(1.05)">
+    <!-- back dark ribbons -->
+    <path d="M-140,-10 C-120,-110 80,-120 150,-30 C220,60 80,150 -10,120 C-100,90 -160,30 -140,-10 Z" fill="url(#lg2)" />
+    <path d="M90,-70 C170,-30 230,40 180,110 C130,180 40,170 -20,140 C-80,110 10,20 90,-70 Z" fill="url(#lg2)" opacity="0.9"/>
+
+    <!-- front glossy ribbons -->
+    <path d="M-160,10 C-120,-60 20,-110 110,-90 C200,-70 230,10 170,70 C110,130 20,140 -40,120 C-100,100 -200,80 -160,10 Z" fill="url(#lg1)" filter="url(#f1)" />
+    <path d="M-40,-30 C20,-80 100,-90 150,-30 C200,30 140,80 80,90 C20,100 -20,80 -60,60 C-100,40 -80,0 -40,-30 Z" fill="url(#lg1)" opacity="0.95"/>
+
+    <!-- highlights -->
+    <path d="M-60,-10 C-10,-40 60,-50 110,-30" stroke="#ffffff" stroke-opacity="0.12" stroke-width="14" stroke-linecap="round" fill="none"/>
+    <path d="M30,40 C70,20 110,10 150,40" stroke="#ffffff" stroke-opacity="0.08" stroke-width="12" stroke-linecap="round" fill="none"/>
+
+    <!-- small orbit ring -->
+    <ellipse cx="60" cy="-20" rx="140" ry="48" fill="none" stroke="#93a0ff" stroke-opacity="0.22" stroke-width="4" transform="rotate(-18)"/>
+
+    <!-- small gem -->
+    <circle cx="200" cy="40" r="10" fill="#2b6de8" />
+  </g>
+</svg>
