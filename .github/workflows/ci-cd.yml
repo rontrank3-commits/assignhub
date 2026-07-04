@@ -8,10 +8,7 @@ on:
 
 jobs:
 
-  # ============================================================
-  # JOB 1: LINT & CODE QUALITY
-  # Kiểm tra cú pháp PHP của toàn bộ project trước khi build/test
-  # ============================================================
+ 
   lint:
     name: Lint PHP
     runs-on: ubuntu-latest
@@ -36,11 +33,7 @@ jobs:
       - name: Kiểm tra coding standard (PSR-12) - cảnh báo, không chặn build
         run: phpcs --standard=PSR12 --extensions=php --ignore=uploads/* . || true
 
-  # ============================================================
-  # JOB 2: BUILD & TEST
-  # Dựng môi trường MySQL, import schema AI.sql, chạy PHP built-in
-  # server và kiểm tra smoke test các trang chính trả về HTTP 200
-  # ============================================================
+ 
   test:
     name: Build & Test
     runs-on: ubuntu-latest
@@ -76,15 +69,12 @@ jobs:
             sleep 2
           done
 
-      # LƯU Ý: AI.sql tự CREATE DATABASE `assignhub` (không phải "AI"),
-      # nên không truyền tên DB ở đây - để script tự tạo đúng database của nó.
+     
       - name: Import database schema (AI.sql)
         run: mysql -h127.0.0.1 -uroot -proot < AI.sql
 
       - name: Điều chỉnh cấu hình DB cho môi trường CI
-        # includes/db.php đang khai báo DB_NAME là 'AI', nhưng AI.sql thực
-        # tế tạo database tên 'assignhub' -> đây là bug lệch tên trong code.
-        # Bước này vá tạm để pipeline chạy được; cần sửa tận gốc trong db.php.
+       
         run: |
           sed -i "s/DB_NAME', 'AI'/DB_NAME', 'assignhub'/" includes/db.php
           sed -i "s/DB_PASS', ''/DB_PASS', 'root'/" includes/db.php
@@ -118,10 +108,7 @@ jobs:
             !.git
             !uploads
 
-  # ============================================================
-  # JOB 3: SECURITY SCAN
-  # Quét rò rỉ thông tin nhạy cảm (secrets, API key, password)
-  # ============================================================
+ 
   security-scan:
     name: Security Scan
     runs-on: ubuntu-latest
@@ -137,11 +124,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  # ============================================================
-  # JOB 4: DEPLOY (CD)
-  # Chỉ chạy khi push vào nhánh main VÀ 3 job trên pass
-  # Đóng gói artifact và deploy lên server qua FTP/SSH
-  # ============================================================
+ 
   deploy:
     name: Deploy to Production
     runs-on: ubuntu-latest
@@ -159,12 +142,22 @@ jobs:
           name: assignhub-build
           path: build
 
-      - name: Deploy qua FTP lên hosting
+    
+      - name: Cấu hình DB production trước khi deploy
+        run: |
+          sed -i "s/DB_HOST', 'localhost'/DB_HOST', '${{ secrets.DB_HOST }}'/" build/includes/db.php
+          sed -i "s/DB_NAME', 'AI'/DB_NAME', '${{ secrets.DB_NAME }}'/" build/includes/db.php
+          sed -i "s/DB_USER', 'root'/DB_USER', '${{ secrets.DB_USER }}'/" build/includes/db.php
+          sed -i "s/DB_PASS', ''/DB_PASS', '${{ secrets.DB_PASS }}'/" build/includes/db.php
+
+      - name: Deploy qua FTPS (explicit) lên hosting
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
+          port: 21
+          protocol: ftps
           local-dir: ./build/
           exclude: |
             **/.git*/**
