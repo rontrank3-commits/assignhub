@@ -159,6 +159,13 @@ jobs:
           name: assignhub-build
           path: build
 
+      # QUAN TRỌNG: file build/includes/db.php trong artifact đã bị job "test"
+      # sửa tạm (DB_NAME -> assignhub, DB_PASS -> root) để chạy trên CI.
+      # Lấy lại bản includes/db.php GỐC (sạch, chưa sửa) từ lần checkout code
+      # ở bước trên để đảm bảo configure_db.php thay đúng chuỗi gốc.
+      - name: Khôi phục db.php nguyên bản trước khi chèn config production
+        run: cp includes/db.php build/includes/db.php
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -175,6 +182,11 @@ jobs:
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASS: ${{ secrets.DB_PASS }}
         run: php .github/scripts/configure_db.php
+
+      - name: Kiểm tra nhanh kết quả (không lộ mật khẩu thật)
+        run: |
+          echo "--- includes/db.php sau khi cấu hình (đã che password) ---"
+          sed 's/DB_PASS.*/DB_PASS...(hidden)/' build/includes/db.php | grep "define('DB_"
 
       - name: Deploy qua FTPS (explicit) lên hosting
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
