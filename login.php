@@ -536,13 +536,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- Demo accounts hint -->
     <div class="demo-hint">
       <span class="hint-title"><?= htmlspecialchars(t('Tài khoản demo')) ?></span>
-      <div class="demo-row" onclick="fillDemo('teacher@edu.vn','password')" title="<?= htmlspecialchars(t('Click để điền tự động')) ?>">
+      <div class="demo-row" onclick="fillDemo('teacher@tdc.edu.vn','password')" title="<?= htmlspecialchars(t('Click để điền tự động')) ?>">
         <span>👨‍🏫 <?= htmlspecialchars(t('Giảng viên')) ?></span>
-        <span><strong>teacher@edu.vn</strong> / password</span>
+        <span><strong>teacher@tdc.edu.vn</strong> / password</span>
       </div>
-      <div class="demo-row" onclick="fillDemo('linh@edu.vn','password')" title="<?= htmlspecialchars(t('Click để điền tự động')) ?>">
+      <div class="demo-row" onclick="fillDemo('linh@tdc.edu.vn','password')" title="<?= htmlspecialchars(t('Click để điền tự động')) ?>">
         <span>👩‍🎓 <?= htmlspecialchars(t('Sinh viên')) ?></span>
-        <span><strong>linh@edu.vn</strong> / password</span>
+        <span><strong>linh@tdc.edu.vn</strong> / password</span>
       </div>
     </div>
 
