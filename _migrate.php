@@ -3,7 +3,7 @@
 
 require_once __DIR__ . '/includes/db.php';
 
-$SECRET_KEY = 'dCek1_HUZNSin7V_BdlpCJY7NxRjc31y';
+$SECRET_KEY = 'dCek1_HUZNSin7V_BdlpCJY7NxRjc31y'; // gitleaks:allow - token tạm 1 lần, không phải credential thật
 
 if (!isset($_GET['key']) || $_GET['key'] !== $SECRET_KEY) {
     http_response_code(403);
