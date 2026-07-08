@@ -7,7 +7,7 @@
 // Script này chuyển toàn bộ bảng sang utf8mb4 và insert lại dữ liệu mẫu
 // với encoding đúng.
 //
-// Truy cập: https://assignhub.plt.pro.vn/_fix_encoding.php?key=dCek1_HUZNSin7V_BdlpCJY7NxRjc31y
+// Truy cập: https://assignhub.plt.pro.vn/_fix_encoding.php?key=<xem giá trị SECRET_KEY khai báo bên dưới>
 // XOÁ FILE NÀY khỏi repo ngay sau khi chạy xong và xác nhận thành công.
 // =====================================================================
 
