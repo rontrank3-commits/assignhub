@@ -12,7 +12,7 @@ function isLoggedIn() {
 
 function requireLogin() {
     if (!isLoggedIn()) {
-        header('Location: /assignhub/login.php');
+        header('Location: /login.php');
         exit;
     }
 }
@@ -20,7 +20,7 @@ function requireLogin() {
 function requireRole($role) {
     requireLogin();
     if ($_SESSION['role'] !== $role) {
-        header('Location: /assignhub/dashboard.php');
+        header('Location: /dashboard.php');
         exit;
     }
 }

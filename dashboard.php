@@ -152,7 +152,7 @@ require_once __DIR__ . '/includes/header.php';
         <?php endforeach; endif; ?>
       </div>
     </div>
-    <a href="/assignhub/assignments.php?action=create" class="btn btn-primary">
+    <a href="/assignments.php?action=create" class="btn btn-primary">
       <i class="ti ti-plus"></i> Tạo bài tập
     </a>
     <?php endif; ?>
@@ -234,7 +234,7 @@ require_once __DIR__ . '/includes/header.php';
       <?php endforeach; ?>
     </div>
   <?php endif; ?>
-  <div style="margin-top:16px;text-align:right"><a href="/assignhub/grades.php" class="btn btn-ghost btn-sm">Xem tất cả điểm</a></div>
+  <div style="margin-top:16px;text-align:right"><a href="/grades.php" class="btn btn-ghost btn-sm">Xem tất cả điểm</a></div>
 </div>
 <?php endif; ?>
 
@@ -242,10 +242,10 @@ require_once __DIR__ . '/includes/header.php';
 <div class="card mb-5">
   <div class="card-title">Hành động nhanh</div>
   <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px">
-    <a href="/assignhub/assignments.php?action=create" class="btn btn-primary btn-sm" style="justify-content:center"><i class="ti ti-plus"></i> Tạo bài tập</a>
-    <a href="/assignhub/grading.php" class="btn btn-ghost btn-sm" style="justify-content:center"><i class="ti ti-robot"></i> Chấm điểm AI</a>
-    <a href="/assignhub/assignments.php" class="btn btn-ghost btn-sm" style="justify-content:center"><i class="ti ti-list-details"></i> Quản lý bài tập</a>
-    <a href="/assignhub/assignments.php" class="btn btn-ghost btn-sm" style="justify-content:center"><i class="ti ti-chart-bar"></i> Xem thống kê</a>
+    <a href="/assignments.php?action=create" class="btn btn-primary btn-sm" style="justify-content:center"><i class="ti ti-plus"></i> Tạo bài tập</a>
+    <a href="/grading.php" class="btn btn-ghost btn-sm" style="justify-content:center"><i class="ti ti-robot"></i> Chấm điểm AI</a>
+    <a href="/assignments.php" class="btn btn-ghost btn-sm" style="justify-content:center"><i class="ti ti-list-details"></i> Quản lý bài tập</a>
+    <a href="/assignments.php" class="btn btn-ghost btn-sm" style="justify-content:center"><i class="ti ti-chart-bar"></i> Xem thống kê</a>
   </div>
 </div>
 <?php endif; ?>
@@ -253,7 +253,7 @@ require_once __DIR__ . '/includes/header.php';
 <!-- Assignments -->
 <div class="page-header mb-4">
   <div class="page-title" style="font-size:17px">Bài tập gần đây</div>
-  <a href="/assignhub/assignments.php" class="btn btn-ghost btn-sm">Xem tất cả</a>
+  <a href="/assignments.php" class="btn btn-ghost btn-sm">Xem tất cả</a>
 </div>
 
 <div class="grid-3">
@@ -288,7 +288,7 @@ require_once __DIR__ . '/includes/header.php';
     <div class="meta-row">
       <span class="meta-label"><?= $a['submitted'] ? '✓ Đã nộp' : '– Chưa nộp' ?></span>
       <?php if (!$a['submitted'] && $status !== 'closed'): ?>
-      <a href="/assignhub/submit.php?id=<?= $a['id'] ?>" class="btn btn-primary btn-sm">Nộp bài</a>
+      <a href="/submit.php?id=<?= $a['id'] ?>" class="btn btn-primary btn-sm">Nộp bài</a>
       <?php endif; ?>
     </div>
     <?php endif; ?>

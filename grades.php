@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/includes/auth.php';
 requireLogin();
-if (isTeacher()) { header('Location: /assignhub/dashboard.php'); exit; }
+if (isTeacher()) { header('Location: /dashboard.php'); exit; }
 
 $db = getDB();
 $uid = $_SESSION['user_id'];

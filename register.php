@@ -2,7 +2,7 @@
 require_once __DIR__ . '/includes/auth.php';
 
 if (isLoggedIn()) {
-    header('Location: /assignhub/dashboard.php');
+    header('Location: /dashboard.php');
     exit;
 }
 
@@ -198,7 +198,7 @@ $pageTitle = 'Đăng ký';
 
 <div class="register-card">
   <div class="register-logo">
-    <img src="/assignhub/assets/img/logo-dark.png" alt="PLT Solutions">
+    <img src="/assets/img/logo-dark.png" alt="PLT Solutions">
   </div>
 
   <?php if ($success): ?>
@@ -206,7 +206,7 @@ $pageTitle = 'Đăng ký';
       <i class="ti ti-circle-check"></i>
       <h2>Đăng ký thành công!</h2>
       <p>Tài khoản của bạn đã được tạo. Hãy đăng nhập để bắt đầu sử dụng AssignHub.</p>
-      <a href="/assignhub/login.php" class="btn-register" style="text-decoration:none">
+      <a href="/login.php" class="btn-register" style="text-decoration:none">
         <i class="ti ti-login"></i> Đến trang đăng nhập
       </a>
     </div>
@@ -287,11 +287,11 @@ $pageTitle = 'Đăng ký';
   </form>
 
   <div class="back-link">
-    Đã có tài khoản? <a href="/assignhub/login.php">Đăng nhập</a>
+    Đã có tài khoản? <a href="/login.php">Đăng nhập</a>
   </div>
 
   <div class="back-link" style="margin-top:8px;">
-    <a href="/assignhub/index.php">← Về trang chủ</a>
+    <a href="/index.php">← Về trang chủ</a>
   </div>
 
   <?php endif; ?>

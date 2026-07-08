@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/includes/auth.php';
 requireLogin();
-if (isTeacher()) { header('Location: /assignhub/dashboard.php'); exit; }
+if (isTeacher()) { header('Location: /dashboard.php'); exit; }
 
 $db = getDB();
 $uid = $_SESSION['user_id'];
@@ -16,7 +16,7 @@ function respond($success, $msg, $assignId = 0) {
         exit;
     }
     flash($msg, $success ? 'success' : 'error');
-    header('Location: /assignhub/submit.php' . ($assignId ? "?id=$assignId" : ''));
+    header('Location: /submit.php' . ($assignId ? "?id=$assignId" : ''));
     exit;
 }
 
@@ -296,7 +296,7 @@ require_once __DIR__ . '/includes/header.php';
 
     var fd = new FormData(form);
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/assignhub/submit.php', true);
+    xhr.open('POST', '/submit.php', true);
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 
     submitBtn.disabled = true;

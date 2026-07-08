@@ -3,7 +3,7 @@ require_once __DIR__ . '/includes/i18n.php';
 require_once __DIR__ . '/includes/auth.php';
 
 if (isLoggedIn()) {
-    header('Location: /assignhub/dashboard.php');
+    header('Location: /dashboard.php');
     exit;
 }
 
@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ]);
             }
 
-            header('Location: /assignhub/dashboard.php');
+            header('Location: /dashboard.php');
             exit;
         } else {
             $error = t('Email hoặc mật khẩu không đúng.');
@@ -435,7 +435,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!-- LEFT BRAND PANEL -->
 <div class="panel-left">
   <div class="panel-brand">
-    <img src="/assignhub/assets/img/logo-dark.png" alt="PLT Solutions">
+    <img src="/assets/img/logo-dark.png" alt="PLT Solutions">
   </div>
 
   <div class="panel-hero">
@@ -528,7 +528,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
 
       <div style="margin-top:12px; text-align:center">
-        <a href="/assignhub/index.php" style="color:var(--plt); font-weight:600; text-decoration:none;">← <?= htmlspecialchars(t('Về trang chủ')) ?></a>
+        <a href="/index.php" style="color:var(--plt); font-weight:600; text-decoration:none;">← <?= htmlspecialchars(t('Về trang chủ')) ?></a>
       </div>
 
     <!-- Demo accounts hint -->
@@ -545,7 +545,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <div class="register-link">
-      <?= htmlspecialchars(t('Chưa có tài khoản?')) ?> <a href="/assignhub/register.php"><?= htmlspecialchars(t('Đăng ký ngay')) ?></a>
+      <?= htmlspecialchars(t('Chưa có tài khoản?')) ?> <a href="/register.php"><?= htmlspecialchars(t('Đăng ký ngay')) ?></a>
     </div>
   </div>
 </div>
@@ -577,6 +577,6 @@ function fillDemo(email, pw) {
   });
 }
 </script>
-<script src="/assignhub/assets/js/app.js"></script>
+<script src="/assets/js/app.js"></script>
 </body>
 </html>

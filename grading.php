@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_grade'])) {
     $db->prepare('UPDATE submissions SET status="graded" WHERE id=?')->execute([$sub_id]);
 
     flash('Đã lưu điểm thành công!');
-    header('Location: /assignhub/grading.php?assignment_id=' . ($_POST['assignment_id'] ?? ''));
+    header('Location: /grading.php?assignment_id=' . ($_POST['assignment_id'] ?? ''));
     exit;
 }
 
@@ -107,7 +107,7 @@ require_once __DIR__ . '/includes/header.php';
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
       <i class="ti ti-file" style="color:var(--accent);font-size:20px"></i>
       <span style="font-size:14px"><?= htmlspecialchars($current['file_name']) ?></span>
-      <a href="/assignhub/uploads/<?= urlencode($current['file_path']) ?>" class="btn btn-ghost btn-sm" download>
+      <a href="/uploads/<?= urlencode($current['file_path']) ?>" class="btn btn-ghost btn-sm" download>
         <i class="ti ti-download"></i> Tải về
       </a>
     </div>
@@ -185,7 +185,7 @@ async function runAIGrade(subId) {
   loadEl.style.display = 'block';
 
   try {
-    const res = await fetch('/assignhub/api_grade.php', {
+    const res = await fetch('/api_grade.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ submission_id: subId })

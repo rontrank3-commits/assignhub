@@ -18,7 +18,7 @@ if ($action === 'create' && isTeacher() && $_SERVER['REQUEST_METHOD'] === 'POST'
         $stmt = $db->prepare('INSERT INTO assignments (title,description,deadline,class,file_types,teacher_id) VALUES (?,?,?,?,?,?)');
         $stmt->execute([$title, $desc, $deadline, $class, $ftypes, $_SESSION['user_id']]);
         flash('Đã tạo bài tập thành công!');
-        header('Location: /assignhub/assignments.php');
+        header('Location: /assignments.php');
         exit;
     }
 }
@@ -28,7 +28,7 @@ if ($action === 'delete' && isTeacher() && isset($_GET['id'])) {
     $stmt = $db->prepare('DELETE FROM assignments WHERE id=? AND teacher_id=?');
     $stmt->execute([$_GET['id'], $_SESSION['user_id']]);
     flash('Đã xóa bài tập.');
-    header('Location: /assignhub/assignments.php');
+    header('Location: /assignments.php');
     exit;
 }
 
@@ -45,7 +45,7 @@ if ($action === 'view' && isTeacher()) {
     }
     if (!$assignmentDetail) {
         flash('Bài tập không tồn tại hoặc bạn không có quyền truy cập.');
-        header('Location: /assignhub/assignments.php');
+        header('Location: /assignments.php');
         exit;
     }
     $stmt = $db->prepare('SELECT s.*, u.name AS student_name, u.student_id AS student_no, g.score, g.feedback FROM submissions s JOIN users u ON u.id=s.student_id LEFT JOIN grades g ON g.submission_id=s.id WHERE s.assignment_id=? ORDER BY s.submitted_at DESC');
@@ -70,7 +70,7 @@ require_once __DIR__ . '/includes/header.php';
 <?php if ($action === 'create' && isTeacher()): ?>
 <div class="page-header">
   <div class="page-title">Tạo bài tập mới</div>
-  <a href="/assignhub/assignments.php" class="btn btn-ghost"><i class="ti ti-arrow-left"></i> Quay lại</a>
+  <a href="/assignments.php" class="btn btn-ghost"><i class="ti ti-arrow-left"></i> Quay lại</a>
 </div>
 <div class="card" style="max-width:620px">
   <form method="POST">
@@ -97,7 +97,7 @@ require_once __DIR__ . '/includes/header.php';
     </div>
     <div class="gap-row">
       <button type="submit" class="btn btn-primary"><i class="ti ti-plus"></i> Tạo bài tập</button>
-      <a href="/assignhub/assignments.php" class="btn btn-ghost">Hủy</a>
+      <a href="/assignments.php" class="btn btn-ghost">Hủy</a>
     </div>
   </form>
 </div>
@@ -110,8 +110,8 @@ require_once __DIR__ . '/includes/header.php';
     <div style="font-size:13px;color:var(--text2);margin-top:4px">Lớp <?= htmlspecialchars($assignmentDetail['class']) ?> · Hạn nộp <?= date('d/m/Y H:i', strtotime($assignmentDetail['deadline'])) ?></div>
   </div>
   <div class="gap-row">
-    <a href="/assignhub/assignments.php" class="btn btn-ghost"><i class="ti ti-arrow-left"></i> Quay lại</a>
-    <a href="/assignhub/grading.php?assignment_id=<?= $assignmentDetail['id'] ?>" class="btn btn-primary"><i class="ti ti-robot"></i> Chấm nhanh</a>
+    <a href="/assignments.php" class="btn btn-ghost"><i class="ti ti-arrow-left"></i> Quay lại</a>
+    <a href="/grading.php?assignment_id=<?= $assignmentDetail['id'] ?>" class="btn btn-primary"><i class="ti ti-robot"></i> Chấm nhanh</a>
   </div>
 </div>
 
@@ -137,8 +137,8 @@ require_once __DIR__ . '/includes/header.php';
       <span class="score-big" style="font-size:16px;"><?= $s['score'] ?></span>
       <?php endif; ?>
       <span class="badge badge-<?= $s['status']==='graded'?'success':'amber' ?>"><?= $s['status']==='graded'?'Đã chấm':'Chờ chấm' ?></span>
-      <a href="/assignhub/grading.php?assignment_id=<?= $assignmentDetail['id'] ?>&sub_id=<?= $s['id'] ?>" class="btn btn-ghost btn-sm">Chấm</a>
-      <a href="/assignhub/uploads/<?= urlencode($s['file_path']) ?>" class="btn btn-ghost btn-sm" download>Tải file</a>
+      <a href="/grading.php?assignment_id=<?= $assignmentDetail['id'] ?>&sub_id=<?= $s['id'] ?>" class="btn btn-ghost btn-sm">Chấm</a>
+      <a href="/uploads/<?= urlencode($s['file_path']) ?>" class="btn btn-ghost btn-sm" download>Tải file</a>
     </div>
   </div>
   <?php endforeach; ?>
@@ -149,7 +149,7 @@ require_once __DIR__ . '/includes/header.php';
 <div class="page-header">
   <div class="page-title">Danh sách bài tập</div>
   <?php if (isTeacher()): ?>
-  <a href="/assignhub/assignments.php?action=create" class="btn btn-primary"><i class="ti ti-plus"></i> Tạo mới</a>
+  <a href="/assignments.php?action=create" class="btn btn-primary"><i class="ti ti-plus"></i> Tạo mới</a>
   <?php endif; ?>
 </div>
 
@@ -178,11 +178,11 @@ require_once __DIR__ . '/includes/header.php';
     <div class="row-right">
       <span class="badge badge-<?= $badge ?>"><?= $label ?></span>
       <?php if (isStudent() && !$a['submitted'] && $diff > 0): ?>
-      <a href="/assignhub/submit.php?id=<?= $a['id'] ?>" class="btn btn-primary btn-sm">Nộp bài</a>
+      <a href="/submit.php?id=<?= $a['id'] ?>" class="btn btn-primary btn-sm">Nộp bài</a>
       <?php endif; ?>
       <?php if (isTeacher()): ?>
-      <a href="/assignhub/assignments.php?action=view&id=<?= $a['id'] ?>" class="btn btn-ghost btn-sm">Danh sách nộp</a>
-      <a href="/assignhub/assignments.php?action=delete&id=<?= $a['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Xóa bài tập này?')">
+      <a href="/assignments.php?action=view&id=<?= $a['id'] ?>" class="btn btn-ghost btn-sm">Danh sách nộp</a>
+      <a href="/assignments.php?action=delete&id=<?= $a['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Xóa bài tập này?')">
         <i class="ti ti-trash"></i>
       </a>
       <?php endif; ?>

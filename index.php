@@ -3,7 +3,7 @@ require_once __DIR__ . '/includes/i18n.php';
 require_once __DIR__ . '/includes/auth.php';
 
 if (isLoggedIn()) {
-    header('Location: /assignhub/dashboard.php');
+    header('Location: /dashboard.php');
     exit;
 }
 
@@ -337,7 +337,7 @@ try {
 
 <nav class="navbar">
   <div class="navbar-brand">
-    <img src="/assignhub/assets/img/logo-dark.png" alt="PLT Solutions" id="navLogo">
+    <img src="/assets/img/logo-dark.png" alt="PLT Solutions" id="navLogo">
     <div>
       <div class="navbar-brand-name">PLT Solutions</div>
       <div class="navbar-brand-sub"><?= htmlspecialchars(t('Cổng học tập đại học')) ?></div>
@@ -345,16 +345,16 @@ try {
   </div>
 
   <div class="navbar-menu">
-    <a href="/assignhub/index.php"><?= htmlspecialchars(t('Trang chủ')) ?></a>
+    <a href="/index.php"><?= htmlspecialchars(t('Trang chủ')) ?></a>
     <a href="#features"><?= htmlspecialchars(t('Tính năng')) ?></a>
-    <a href="/assignhub/login.php"><?= htmlspecialchars(t('Đăng nhập')) ?></a>
+    <a href="/login.php"><?= htmlspecialchars(t('Đăng nhập')) ?></a>
   </div>
 
   <div class="navbar-actions">
     <button class="mode-toggle" onclick="toggleMode()" id="modeBtn" aria-label="<?= htmlspecialchars(t('Đổi giao diện sáng/tối')) ?>">
       <i class="ti ti-sun" id="modeIcon"></i>
     </button>
-    <a href="/assignhub/register.php" class="btn-nav-cta"><?= htmlspecialchars(t('Đăng ký')) ?></a>
+    <a href="/register.php" class="btn-nav-cta"><?= htmlspecialchars(t('Đăng ký')) ?></a>
   </div>
 </nav>
 
@@ -366,8 +366,8 @@ try {
     </h1>
     <p><?= htmlspecialchars(t('PLT Solutions giúp trường đại học quản lý bài tập, chấm điểm và báo cáo tiến độ học tập dễ dàng hơn.')) ?></p>
     <div class="hero-actions">
-      <a href="/assignhub/register.php" class="btn-hero-primary"><i class="ti ti-user-plus"></i> <?= htmlspecialchars(t('Đăng ký miễn phí')) ?></a>
-      <a href="/assignhub/login.php" class="btn-hero-secondary"><i class="ti ti-arrow-right"></i> <?= htmlspecialchars(t('Đăng nhập')) ?></a>
+      <a href="/register.php" class="btn-hero-primary"><i class="ti ti-user-plus"></i> <?= htmlspecialchars(t('Đăng ký miễn phí')) ?></a>
+      <a href="/login.php" class="btn-hero-secondary"><i class="ti ti-arrow-right"></i> <?= htmlspecialchars(t('Đăng nhập')) ?></a>
     </div>
   </div>
 
@@ -487,13 +487,13 @@ try {
 <section class="cta">
   <h2><?= htmlspecialchars(t('Nâng tầm trải nghiệm học tập ngay hôm nay')) ?></h2>
   <p><?= htmlspecialchars(t('PLT Solutions giúp bạn chuyển đổi quy trình giáo dục thành một nền tảng chuyên nghiệp, dễ quản lý.')) ?></p>
-  <a href="/assignhub/register.php" class="btn-hero-primary"><i class="ti ti-user-plus"></i> <?= htmlspecialchars(t('Đăng ký ngay')) ?></a>
+  <a href="/register.php" class="btn-hero-primary"><i class="ti ti-user-plus"></i> <?= htmlspecialchars(t('Đăng ký ngay')) ?></a>
 </section>
 
 <footer class="footer">
   &copy; <?= date('Y') ?> PLT Solutions. <?= htmlspecialchars(t('Xây dựng để phục vụ giáo dục đại học hiện đại.')) ?>
 </footer>
 
-<script src="/assignhub/assets/js/app.js"></script>
+<script src="/assets/js/app.js"></script>
 </body>
 </html>
