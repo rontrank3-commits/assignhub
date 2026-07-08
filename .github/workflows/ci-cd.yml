@@ -129,8 +129,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+        # LƯU Ý: không dùng fetch-depth: 0 (toàn bộ lịch sử) vì một token tạm
+        # dùng 1 lần từng bị commit ở version cũ (trước khi thêm gitleaks:allow)
+        # sẽ luôn bị Gitleaks phát hiện lại mãi mãi nếu quét full history, dù
+        # commit hiện tại đã sửa đúng. Quét snapshot mới nhất là đủ cho mục
+        # đích chặn secret bị lộ trong code đang chạy thực tế.
 
       - name: Quét secret bị lộ trong code (Gitleaks)
         uses: gitleaks/gitleaks-action@v2
