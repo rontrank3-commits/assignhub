@@ -129,11 +129,18 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        # LƯU Ý: không dùng fetch-depth: 0 (toàn bộ lịch sử) vì một token tạm
-        # dùng 1 lần từng bị commit ở version cũ (trước khi thêm gitleaks:allow)
-        # sẽ luôn bị Gitleaks phát hiện lại mãi mãi nếu quét full history, dù
-        # commit hiện tại đã sửa đúng. Quét snapshot mới nhất là đủ cho mục
-        # đích chặn secret bị lộ trong code đang chạy thực tế.
+        with:
+          # QUAN TRỌNG: gitleaks-action tính diff theo khoảng commit của lần
+          # push (before..after). Với fetch-depth mặc định = 1, git chỉ có
+          # đúng 1 commit trong working tree nên không tìm thấy commit gốc
+          # để so sánh -> lỗi "unknown revision" -> job fail dù không có
+          # secret nào bị lộ thật. fetch-depth: 2 đảm bảo có đủ commit cha
+          # để gitleaks diff đúng phạm vi của push hiện tại.
+          # Lưu ý: đây KHÔNG phải quét toàn bộ lịch sử git (đó là lý do
+          # trước đây không dùng fetch-depth: 0) - gitleaks-action vẫn chỉ
+          # scan đúng khoảng commit của push này, nên token cũ đã fix ở
+          # version trước sẽ không bị phát hiện lại.
+          fetch-depth: 2
 
       - name: Quét secret bị lộ trong code (Gitleaks)
         uses: gitleaks/gitleaks-action@v2
